@@ -1,6 +1,8 @@
 import 'package:api_football_countries/core/core.dart';
 import 'package:api_football_countries/data/data.dart';
+import 'package:api_football_countries/domain/entity/country_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -28,9 +30,7 @@ void main() {
 
   final name = 'England';
   final List<CountryModel> countries = [
-    CountryModel(name: 'England'),
-    CountryModel(name: 'England2'),
-    CountryModel(name: 'England3'),
+    CountryModel(),
   ];
   
   test('Should check if device has connection', () {
@@ -47,11 +47,14 @@ void main() {
           .thenAnswer((_) async => true);
     });
 
-    test('Should return remote data when the remote call is successfull',
-    () async {
+    test('Should return remote data when the remote call is successfull', () async {
 
       when(mockDataSource.getCountryByName(any))
           .thenAnswer((_) async => countries);
+
+      final result = await repositoryImpl.getCountryByName(name);
+
+      expect(result, isNotNull);
 
     });
   });
