@@ -1,6 +1,6 @@
 part of '../domain.dart';
 
-class GetCountryByNameUseCase implements UseCase<CountryEntity, String?> {
+class GetCountryByNameUseCase implements UseCase<List<CountryEntity>, String?> {
 
   final CountryByNameRepository repository;
 
@@ -9,7 +9,7 @@ class GetCountryByNameUseCase implements UseCase<CountryEntity, String?> {
   });
 
   @override
-  Future<Either<Failure, CountryEntity>> call([String? name]) {
+  Future<Either<Failure, List<CountryEntity>>> call([String? name]) {
     return repository.getCountryByName(name);
   }
 }

@@ -19,19 +19,19 @@ void main() {
     useCase = GetCountryByNameUseCase(repository: mockRepository);
   });
 
-  CountryEntity country = CountryEntity(
+  List<CountryEntity> countries = [CountryEntity(
     name: 'name'
-  );
+  )];
 
-  provideDummy<Either<Failure, CountryEntity>>(Right(country));
+  provideDummy<Either<Failure, List<CountryEntity>>>(Right(countries));
 
   test('Should get Right value', () async {
 
     when(mockRepository.getCountryByName(any))
-        .thenAnswer((_) async => Right(country));
+        .thenAnswer((_) async => Right(countries));
 
     final result = await useCase('countryName');
     
-    expect(result, Right(country));
+    expect(result, Right(countries));
   });
 }

@@ -1,5 +1,5 @@
 part of '../domain.dart';
 
 abstract class CountryByNameRepository {
-  Future<Either<Failure, CountryEntity>> getCountryByName(String? name);
+  Future<Either<Failure, List<CountryEntity>>> getCountryByName(String? name);
 }
